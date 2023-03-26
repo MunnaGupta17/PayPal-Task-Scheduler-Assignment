@@ -25,25 +25,25 @@ public class UserController {
 	@Autowired
 	private UserServices userService;
 	
-	@PostMapping("/users/save")
+	@PostMapping("/save")
 	public ResponseEntity<User> addUserHandler(@RequestBody User user) throws UserException{
 		User savedUser = userService.addUser(user);
 		return new ResponseEntity<>(savedUser,HttpStatus.ACCEPTED);
 	}
 	
-	@DeleteMapping("/users/delete/{userId}")
+	@DeleteMapping("/delete/{userId}")
 	public ResponseEntity<String> deleteUserHandler(@PathVariable("userId") Integer userId) throws UserException{
 		String message =  userService.deleteUser(userId);
 		return new ResponseEntity<>(message,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/users")
+	@GetMapping("")
 	public ResponseEntity<List<User>> getAllUserHandler() throws UserException{
 		List<User> userList = userService.getAllUser();
 		return new ResponseEntity<List<User>>(userList,HttpStatus.OK);
 	}
 	
-	@GetMapping("/users/{userId}")
+	@GetMapping("/{userId}")
 	public ResponseEntity<User> getUserByIdHandler(@PathVariable("userId") Integer userId) throws UserException{
 		User user = userService.getUserById(userId);
 		return new ResponseEntity<User>(user,HttpStatus.OK);

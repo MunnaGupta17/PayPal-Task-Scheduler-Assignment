@@ -25,13 +25,13 @@ public class SprintController {
 	@Autowired
 	private SprintServices sprintService;
 
-	@PostMapping("/sprints/save")
+	@PostMapping("/save")
 	public ResponseEntity<Sprint> addSprintHandler(@RequestBody Sprint sprint) throws SprintException{
 		Sprint savedSprint = sprintService.createSprint(sprint);
 		return new ResponseEntity<>(savedSprint,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/sprints")
+	@GetMapping("")
 	public ResponseEntity<List<Sprint>> getAllSprintsHandler() throws SprintException{
 		List<Sprint> sprintList = sprintService.getAllSprints();
 		return new ResponseEntity<List<Sprint>>(sprintList,HttpStatus.OK);

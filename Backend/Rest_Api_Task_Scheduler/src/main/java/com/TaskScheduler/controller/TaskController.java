@@ -29,37 +29,37 @@ public class TaskController {
 	
 	
 	
-	@PostMapping("/tasks/save")
+	@PostMapping("/save")
 	public ResponseEntity<Task> addTaskHandler(@RequestBody Task task) throws TaskException{
 		Task savedTask = taskService.createTask(task);
 		return new ResponseEntity<>(savedTask,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/tasks/sprint/{sprintId}")
+	@GetMapping("/sprint/{sprintId}")
 	public ResponseEntity<List<Task>> getAllTasksBySprintHandler(@PathVariable("sprintId") Integer sprintId) throws TaskException, SprintException{
 		List<Task> taskList = taskService.getAllTasksBySprint(sprintId);
 		return new ResponseEntity<List<Task>>(taskList,HttpStatus.OK);
 	}
 	
-	@GetMapping("/tasks/{assigneeId}")
+	@GetMapping("/{assigneeId}")
 	public ResponseEntity<List<Task>> getAllTasksByAssigneeHandler(@PathVariable("assigneeId") Integer assigneeId) throws UserException, TaskException{
 		List<Task> taskList = taskService.getAllTasksByAssignee(assigneeId);
 		return new ResponseEntity<List<Task>>(taskList,HttpStatus.OK);
 	}
 	
-	@PutMapping("/tasks/{taskId}/{assigneeId}")
+	@PutMapping("/{taskId}/{assigneeId}")
 	public ResponseEntity<Task> updateTaskAssigneeHandler(@PathVariable("taskId") Integer taskId, @PathVariable("assigneeId") Integer assigneeId) throws UserException, TaskException {
 		Task task = taskService.updateTaskAssignee(taskId, assigneeId);
 		return new ResponseEntity<>(task,HttpStatus.ACCEPTED);
 	}
 	
-	@PutMapping("/tasks/{taskId}")
+	@PutMapping("/{taskId}")
 	public ResponseEntity<Task> updateTaskStatusHandler(@PathVariable("taskId") Integer taskId, TaskStatus status) throws TaskException{
 		Task task = taskService.updateTaskStatus(taskId, status);
 		return new ResponseEntity<>(task,HttpStatus.ACCEPTED);
 	}
 	
-	@GetMapping("/tasks/weekday/{day}")
+	@GetMapping("/weekdayTasks/{day}")
 	public ResponseEntity<List<Task>> getAllTaskByWeekDays(@PathVariable("day") String day) throws TaskException{
 		List<Task> taskList = taskService.getAllTaskByWeekDays(day);
 		return new ResponseEntity<List<Task>>(taskList,HttpStatus.OK);
